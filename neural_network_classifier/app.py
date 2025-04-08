@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 from src.model import load_model, predict
@@ -15,31 +14,32 @@ lor = st.slider("LOR Strength (1-5)", 1.0, 5.0, step=0.5)
 cgpa = st.number_input("CGPA (0-10)", min_value=0.0, max_value=10.0, step=0.1)
 research = st.selectbox("Research Experience", ["No", "Yes"])
 
-# Format input as one-hot-encoded DataFrame
+# Load model once
+model = load_model()
+
+# Build input dict (initial values)
 input_dict = {
     "GRE_Score": gre,
     "TOEFL_Score": toefl,
     "SOP": sop,
-    "LOR ": lor,
+    "LOR": lor,
     "CGPA": cgpa,
-    "University_Rating_" + str(univ_rating): 1,
+    f"University_Rating_{univ_rating}": 1,
     "Research_1" if research == "Yes" else "Research_0": 1
 }
 
-# Fill missing dummy variables with 0
-expected_cols = [
-    "GRE_Score", "TOEFL_Score", "SOP", "LOR ", "CGPA",
-    "University_Rating_1", "University_Rating_2", "University_Rating_3", "University_Rating_4", "University_Rating_5",
-    "Research_0", "Research_1"
-]
+# Let the model tell us which features it was trained on
+expected_cols = list(model.feature_names_in_)
 
+# Fill missing dummy variables with 0
 for col in expected_cols:
     input_dict.setdefault(col, 0)
 
+# Create final input DataFrame in correct order
 input_df = pd.DataFrame([input_dict])[expected_cols]
 
+# Prediction
 if st.button("Predict Admission Chance"):
-    model = load_model()
     result = predict(model, input_df)[0]
     if result == 1:
         st.success("✅ High chance of admission!")
