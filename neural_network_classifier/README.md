@@ -1,8 +1,8 @@
-# 🎓 Neural Network Admission Classifier
+# Neural Network Admission Classifier
 
 This project uses a neural network (MLPClassifier) to predict whether a student has a high chance of being admitted based on their GRE, TOEFL, CGPA, and other academic metrics.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 neural_network_classifier/
@@ -21,7 +21,7 @@ neural_network_classifier/
 └── README.md
 ```
 
-## 🚀 How to Run
+## How to Run
 
 1. Install dependencies:
    ```bash
@@ -40,7 +40,7 @@ neural_network_classifier/
    streamlit run app.py
    ```
 
-## ✅ Output
+## Output
 
 - Trains an MLP neural network
 - Predicts admission chances

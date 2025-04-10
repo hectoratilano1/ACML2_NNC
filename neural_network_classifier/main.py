@@ -18,7 +18,7 @@ def run_pipeline():
         df = preprocessing.load_data("data/Admission.csv")
         X, y = preprocessing.prepare_features(df)
 
-        # 🔧 Fix: Strip whitespace from column names
+        # Fix: Strip whitespace from column names
         X.columns = X.columns.str.strip()
         logging.info(f"Cleaned feature names: {X.columns.tolist()}")
 
