@@ -44,4 +44,4 @@ neural_network_classifier/
 
 - Trains an MLP neural network
 - Predicts admission chances
-- Streamlit UI for live testing
+- Streamlit UI for live testing: https://ac-ml-nnc-hh-2025.streamlit.app/
